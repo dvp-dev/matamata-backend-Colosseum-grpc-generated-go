@@ -18,7 +18,6 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CategoryServiceClient interface {
-	GetList(ctx context.Context, in *GetListRequest, opts ...grpc.CallOption) (*GetListResponse, error)
 	GetChildrenList(ctx context.Context, in *GetChildrenListRequest, opts ...grpc.CallOption) (*GetChildrenListResponse, error)
 }
 
@@ -28,15 +27,6 @@ type categoryServiceClient struct {
 
 func NewCategoryServiceClient(cc grpc.ClientConnInterface) CategoryServiceClient {
 	return &categoryServiceClient{cc}
-}
-
-func (c *categoryServiceClient) GetList(ctx context.Context, in *GetListRequest, opts ...grpc.CallOption) (*GetListResponse, error) {
-	out := new(GetListResponse)
-	err := c.cc.Invoke(ctx, "/mmp.category.v1.CategoryService/GetList", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *categoryServiceClient) GetChildrenList(ctx context.Context, in *GetChildrenListRequest, opts ...grpc.CallOption) (*GetChildrenListResponse, error) {
@@ -52,7 +42,6 @@ func (c *categoryServiceClient) GetChildrenList(ctx context.Context, in *GetChil
 // All implementations must embed UnimplementedCategoryServiceServer
 // for forward compatibility
 type CategoryServiceServer interface {
-	GetList(context.Context, *GetListRequest) (*GetListResponse, error)
 	GetChildrenList(context.Context, *GetChildrenListRequest) (*GetChildrenListResponse, error)
 	mustEmbedUnimplementedCategoryServiceServer()
 }
@@ -61,9 +50,6 @@ type CategoryServiceServer interface {
 type UnimplementedCategoryServiceServer struct {
 }
 
-func (UnimplementedCategoryServiceServer) GetList(context.Context, *GetListRequest) (*GetListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetList not implemented")
-}
 func (UnimplementedCategoryServiceServer) GetChildrenList(context.Context, *GetChildrenListRequest) (*GetChildrenListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildrenList not implemented")
 }
@@ -78,24 +64,6 @@ type UnsafeCategoryServiceServer interface {
 
 func RegisterCategoryServiceServer(s grpc.ServiceRegistrar, srv CategoryServiceServer) {
 	s.RegisterService(&CategoryService_ServiceDesc, srv)
-}
-
-func _CategoryService_GetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CategoryServiceServer).GetList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/mmp.category.v1.CategoryService/GetList",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoryServiceServer).GetList(ctx, req.(*GetListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _CategoryService_GetChildrenList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -123,10 +91,6 @@ var CategoryService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "mmp.category.v1.CategoryService",
 	HandlerType: (*CategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetList",
-			Handler:    _CategoryService_GetList_Handler,
-		},
 		{
 			MethodName: "GetChildrenList",
 			Handler:    _CategoryService_GetChildrenList_Handler,
