@@ -1,4 +1,4 @@
-module github.com/dvp-dev/matamata-backend-Colosseum-grpc-generated-go
+module github.com/dvp-dev/matamata-grpc-generated-go
 
 go 1.15
 
