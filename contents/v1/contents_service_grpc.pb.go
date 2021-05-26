@@ -23,6 +23,21 @@ type ContentServiceClient interface {
 	TagCreate(ctx context.Context, in *TagCreateRequest, opts ...grpc.CallOption) (*TagCreateResponse, error)
 	TagUpdate(ctx context.Context, in *TagUpdateRequest, opts ...grpc.CallOption) (*TagUpdateResponse, error)
 	TagDelete(ctx context.Context, in *TagDeleteRequest, opts ...grpc.CallOption) (*TagDeleteResponse, error)
+	Category1GetOne(ctx context.Context, in *Category1GetOneRequest, opts ...grpc.CallOption) (*Category1GetOneResponse, error)
+	Category2GetOne(ctx context.Context, in *Category2GetOneRequest, opts ...grpc.CallOption) (*Category2GetOneResponse, error)
+	Category3GetOne(ctx context.Context, in *Category3GetOneRequest, opts ...grpc.CallOption) (*Category3GetOneResponse, error)
+	Category1GetMultiple(ctx context.Context, in *Category1GetMultipleRequest, opts ...grpc.CallOption) (*Category1GetMultipleResponse, error)
+	Category2GetMultiple(ctx context.Context, in *Category2GetMultipleRequest, opts ...grpc.CallOption) (*Category2GetMultipleResponse, error)
+	Category3GetMultiple(ctx context.Context, in *Category3GetMultipleRequest, opts ...grpc.CallOption) (*Category3GetMultipleResponse, error)
+	Category1Create(ctx context.Context, in *Category1CreateRequest, opts ...grpc.CallOption) (*Category1CreateResponse, error)
+	Category2Create(ctx context.Context, in *Category2CreateRequest, opts ...grpc.CallOption) (*Category2CreateResponse, error)
+	Category3Create(ctx context.Context, in *Category3CreateRequest, opts ...grpc.CallOption) (*Category3CreateResponse, error)
+	Category1Update(ctx context.Context, in *Category1UpdateRequest, opts ...grpc.CallOption) (*Category1UpdateResponse, error)
+	Category2Update(ctx context.Context, in *Category2UpdateRequest, opts ...grpc.CallOption) (*Category2UpdateResponse, error)
+	Category3Update(ctx context.Context, in *Category3UpdateRequest, opts ...grpc.CallOption) (*Category3UpdateResponse, error)
+	Category1Delete(ctx context.Context, in *Category1DeleteRequest, opts ...grpc.CallOption) (*Category1DeleteResponse, error)
+	Category2Delete(ctx context.Context, in *Category2DeleteRequest, opts ...grpc.CallOption) (*Category2DeleteResponse, error)
+	Category3Delete(ctx context.Context, in *Category3DeleteRequest, opts ...grpc.CallOption) (*Category3DeleteResponse, error)
 	ArticleGetOne(ctx context.Context, in *ArticleGetOneRequest, opts ...grpc.CallOption) (*ArticleGetOneResponse, error)
 	ArticleGetList(ctx context.Context, in *ArticleGetListRequest, opts ...grpc.CallOption) (*ArticleGetListResponse, error)
 	ArticleCreate(ctx context.Context, in *ArticleCreateRequest, opts ...grpc.CallOption) (*ArticleCreateResponse, error)
@@ -83,6 +98,141 @@ func (c *contentServiceClient) TagDelete(ctx context.Context, in *TagDeleteReque
 	return out, nil
 }
 
+func (c *contentServiceClient) Category1GetOne(ctx context.Context, in *Category1GetOneRequest, opts ...grpc.CallOption) (*Category1GetOneResponse, error) {
+	out := new(Category1GetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category1GetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category2GetOne(ctx context.Context, in *Category2GetOneRequest, opts ...grpc.CallOption) (*Category2GetOneResponse, error) {
+	out := new(Category2GetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category2GetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category3GetOne(ctx context.Context, in *Category3GetOneRequest, opts ...grpc.CallOption) (*Category3GetOneResponse, error) {
+	out := new(Category3GetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category3GetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category1GetMultiple(ctx context.Context, in *Category1GetMultipleRequest, opts ...grpc.CallOption) (*Category1GetMultipleResponse, error) {
+	out := new(Category1GetMultipleResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category1GetMultiple", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category2GetMultiple(ctx context.Context, in *Category2GetMultipleRequest, opts ...grpc.CallOption) (*Category2GetMultipleResponse, error) {
+	out := new(Category2GetMultipleResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category2GetMultiple", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category3GetMultiple(ctx context.Context, in *Category3GetMultipleRequest, opts ...grpc.CallOption) (*Category3GetMultipleResponse, error) {
+	out := new(Category3GetMultipleResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category3GetMultiple", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category1Create(ctx context.Context, in *Category1CreateRequest, opts ...grpc.CallOption) (*Category1CreateResponse, error) {
+	out := new(Category1CreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category1Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category2Create(ctx context.Context, in *Category2CreateRequest, opts ...grpc.CallOption) (*Category2CreateResponse, error) {
+	out := new(Category2CreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category2Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category3Create(ctx context.Context, in *Category3CreateRequest, opts ...grpc.CallOption) (*Category3CreateResponse, error) {
+	out := new(Category3CreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category3Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category1Update(ctx context.Context, in *Category1UpdateRequest, opts ...grpc.CallOption) (*Category1UpdateResponse, error) {
+	out := new(Category1UpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category1Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category2Update(ctx context.Context, in *Category2UpdateRequest, opts ...grpc.CallOption) (*Category2UpdateResponse, error) {
+	out := new(Category2UpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category2Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category3Update(ctx context.Context, in *Category3UpdateRequest, opts ...grpc.CallOption) (*Category3UpdateResponse, error) {
+	out := new(Category3UpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category3Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category1Delete(ctx context.Context, in *Category1DeleteRequest, opts ...grpc.CallOption) (*Category1DeleteResponse, error) {
+	out := new(Category1DeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category1Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category2Delete(ctx context.Context, in *Category2DeleteRequest, opts ...grpc.CallOption) (*Category2DeleteResponse, error) {
+	out := new(Category2DeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category2Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) Category3Delete(ctx context.Context, in *Category3DeleteRequest, opts ...grpc.CallOption) (*Category3DeleteResponse, error) {
+	out := new(Category3DeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/Category3Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *contentServiceClient) ArticleGetOne(ctx context.Context, in *ArticleGetOneRequest, opts ...grpc.CallOption) (*ArticleGetOneResponse, error) {
 	out := new(ArticleGetOneResponse)
 	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/ArticleGetOne", in, out, opts...)
@@ -137,6 +287,21 @@ type ContentServiceServer interface {
 	TagCreate(context.Context, *TagCreateRequest) (*TagCreateResponse, error)
 	TagUpdate(context.Context, *TagUpdateRequest) (*TagUpdateResponse, error)
 	TagDelete(context.Context, *TagDeleteRequest) (*TagDeleteResponse, error)
+	Category1GetOne(context.Context, *Category1GetOneRequest) (*Category1GetOneResponse, error)
+	Category2GetOne(context.Context, *Category2GetOneRequest) (*Category2GetOneResponse, error)
+	Category3GetOne(context.Context, *Category3GetOneRequest) (*Category3GetOneResponse, error)
+	Category1GetMultiple(context.Context, *Category1GetMultipleRequest) (*Category1GetMultipleResponse, error)
+	Category2GetMultiple(context.Context, *Category2GetMultipleRequest) (*Category2GetMultipleResponse, error)
+	Category3GetMultiple(context.Context, *Category3GetMultipleRequest) (*Category3GetMultipleResponse, error)
+	Category1Create(context.Context, *Category1CreateRequest) (*Category1CreateResponse, error)
+	Category2Create(context.Context, *Category2CreateRequest) (*Category2CreateResponse, error)
+	Category3Create(context.Context, *Category3CreateRequest) (*Category3CreateResponse, error)
+	Category1Update(context.Context, *Category1UpdateRequest) (*Category1UpdateResponse, error)
+	Category2Update(context.Context, *Category2UpdateRequest) (*Category2UpdateResponse, error)
+	Category3Update(context.Context, *Category3UpdateRequest) (*Category3UpdateResponse, error)
+	Category1Delete(context.Context, *Category1DeleteRequest) (*Category1DeleteResponse, error)
+	Category2Delete(context.Context, *Category2DeleteRequest) (*Category2DeleteResponse, error)
+	Category3Delete(context.Context, *Category3DeleteRequest) (*Category3DeleteResponse, error)
 	ArticleGetOne(context.Context, *ArticleGetOneRequest) (*ArticleGetOneResponse, error)
 	ArticleGetList(context.Context, *ArticleGetListRequest) (*ArticleGetListResponse, error)
 	ArticleCreate(context.Context, *ArticleCreateRequest) (*ArticleCreateResponse, error)
@@ -163,6 +328,51 @@ func (UnimplementedContentServiceServer) TagUpdate(context.Context, *TagUpdateRe
 }
 func (UnimplementedContentServiceServer) TagDelete(context.Context, *TagDeleteRequest) (*TagDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TagDelete not implemented")
+}
+func (UnimplementedContentServiceServer) Category1GetOne(context.Context, *Category1GetOneRequest) (*Category1GetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category1GetOne not implemented")
+}
+func (UnimplementedContentServiceServer) Category2GetOne(context.Context, *Category2GetOneRequest) (*Category2GetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category2GetOne not implemented")
+}
+func (UnimplementedContentServiceServer) Category3GetOne(context.Context, *Category3GetOneRequest) (*Category3GetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category3GetOne not implemented")
+}
+func (UnimplementedContentServiceServer) Category1GetMultiple(context.Context, *Category1GetMultipleRequest) (*Category1GetMultipleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category1GetMultiple not implemented")
+}
+func (UnimplementedContentServiceServer) Category2GetMultiple(context.Context, *Category2GetMultipleRequest) (*Category2GetMultipleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category2GetMultiple not implemented")
+}
+func (UnimplementedContentServiceServer) Category3GetMultiple(context.Context, *Category3GetMultipleRequest) (*Category3GetMultipleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category3GetMultiple not implemented")
+}
+func (UnimplementedContentServiceServer) Category1Create(context.Context, *Category1CreateRequest) (*Category1CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category1Create not implemented")
+}
+func (UnimplementedContentServiceServer) Category2Create(context.Context, *Category2CreateRequest) (*Category2CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category2Create not implemented")
+}
+func (UnimplementedContentServiceServer) Category3Create(context.Context, *Category3CreateRequest) (*Category3CreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category3Create not implemented")
+}
+func (UnimplementedContentServiceServer) Category1Update(context.Context, *Category1UpdateRequest) (*Category1UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category1Update not implemented")
+}
+func (UnimplementedContentServiceServer) Category2Update(context.Context, *Category2UpdateRequest) (*Category2UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category2Update not implemented")
+}
+func (UnimplementedContentServiceServer) Category3Update(context.Context, *Category3UpdateRequest) (*Category3UpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category3Update not implemented")
+}
+func (UnimplementedContentServiceServer) Category1Delete(context.Context, *Category1DeleteRequest) (*Category1DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category1Delete not implemented")
+}
+func (UnimplementedContentServiceServer) Category2Delete(context.Context, *Category2DeleteRequest) (*Category2DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category2Delete not implemented")
+}
+func (UnimplementedContentServiceServer) Category3Delete(context.Context, *Category3DeleteRequest) (*Category3DeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Category3Delete not implemented")
 }
 func (UnimplementedContentServiceServer) ArticleGetOne(context.Context, *ArticleGetOneRequest) (*ArticleGetOneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ArticleGetOne not implemented")
@@ -278,6 +488,276 @@ func _ContentService_TagDelete_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ContentServiceServer).TagDelete(ctx, req.(*TagDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category1GetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category1GetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category1GetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category1GetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category1GetOne(ctx, req.(*Category1GetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category2GetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category2GetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category2GetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category2GetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category2GetOne(ctx, req.(*Category2GetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category3GetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category3GetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category3GetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category3GetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category3GetOne(ctx, req.(*Category3GetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category1GetMultiple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category1GetMultipleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category1GetMultiple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category1GetMultiple",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category1GetMultiple(ctx, req.(*Category1GetMultipleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category2GetMultiple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category2GetMultipleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category2GetMultiple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category2GetMultiple",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category2GetMultiple(ctx, req.(*Category2GetMultipleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category3GetMultiple_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category3GetMultipleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category3GetMultiple(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category3GetMultiple",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category3GetMultiple(ctx, req.(*Category3GetMultipleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category1Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category1CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category1Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category1Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category1Create(ctx, req.(*Category1CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category2Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category2CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category2Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category2Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category2Create(ctx, req.(*Category2CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category3Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category3CreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category3Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category3Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category3Create(ctx, req.(*Category3CreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category1Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category1UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category1Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category1Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category1Update(ctx, req.(*Category1UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category2Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category2UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category2Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category2Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category2Update(ctx, req.(*Category2UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category3Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category3UpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category3Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category3Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category3Update(ctx, req.(*Category3UpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category1Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category1DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category1Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category1Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category1Delete(ctx, req.(*Category1DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category2Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category2DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category2Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category2Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category2Delete(ctx, req.(*Category2DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_Category3Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Category3DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).Category3Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/Category3Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).Category3Delete(ctx, req.(*Category3DeleteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -398,6 +878,66 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TagDelete",
 			Handler:    _ContentService_TagDelete_Handler,
+		},
+		{
+			MethodName: "Category1GetOne",
+			Handler:    _ContentService_Category1GetOne_Handler,
+		},
+		{
+			MethodName: "Category2GetOne",
+			Handler:    _ContentService_Category2GetOne_Handler,
+		},
+		{
+			MethodName: "Category3GetOne",
+			Handler:    _ContentService_Category3GetOne_Handler,
+		},
+		{
+			MethodName: "Category1GetMultiple",
+			Handler:    _ContentService_Category1GetMultiple_Handler,
+		},
+		{
+			MethodName: "Category2GetMultiple",
+			Handler:    _ContentService_Category2GetMultiple_Handler,
+		},
+		{
+			MethodName: "Category3GetMultiple",
+			Handler:    _ContentService_Category3GetMultiple_Handler,
+		},
+		{
+			MethodName: "Category1Create",
+			Handler:    _ContentService_Category1Create_Handler,
+		},
+		{
+			MethodName: "Category2Create",
+			Handler:    _ContentService_Category2Create_Handler,
+		},
+		{
+			MethodName: "Category3Create",
+			Handler:    _ContentService_Category3Create_Handler,
+		},
+		{
+			MethodName: "Category1Update",
+			Handler:    _ContentService_Category1Update_Handler,
+		},
+		{
+			MethodName: "Category2Update",
+			Handler:    _ContentService_Category2Update_Handler,
+		},
+		{
+			MethodName: "Category3Update",
+			Handler:    _ContentService_Category3Update_Handler,
+		},
+		{
+			MethodName: "Category1Delete",
+			Handler:    _ContentService_Category1Delete_Handler,
+		},
+		{
+			MethodName: "Category2Delete",
+			Handler:    _ContentService_Category2Delete_Handler,
+		},
+		{
+			MethodName: "Category3Delete",
+			Handler:    _ContentService_Category3Delete_Handler,
 		},
 		{
 			MethodName: "ArticleGetOne",
