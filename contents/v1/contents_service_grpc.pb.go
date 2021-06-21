@@ -43,6 +43,12 @@ type ContentServiceClient interface {
 	ArticleCreate(ctx context.Context, in *ArticleCreateRequest, opts ...grpc.CallOption) (*ArticleCreateResponse, error)
 	ArticleUpdate(ctx context.Context, in *ArticleUpdateRequest, opts ...grpc.CallOption) (*ArticleUpdateResponse, error)
 	ArticleDelete(ctx context.Context, in *ArticleDeleteRequest, opts ...grpc.CallOption) (*ArticleDeleteResponse, error)
+	InfografikGetOne(ctx context.Context, in *InfografikGetOneRequest, opts ...grpc.CallOption) (*InfografikGetOneResponse, error)
+	InfografikGetList(ctx context.Context, in *InfografikGetListRequest, opts ...grpc.CallOption) (*InfografikGetListResponse, error)
+	InfografikGetListStream(ctx context.Context, in *InfografikGetListRequest, opts ...grpc.CallOption) (ContentService_InfografikGetListStreamClient, error)
+	InfografikCreate(ctx context.Context, in *InfografikCreateRequest, opts ...grpc.CallOption) (*InfografikCreateResponse, error)
+	InfografikUpdate(ctx context.Context, in *InfografikUpdateRequest, opts ...grpc.CallOption) (*InfografikUpdateResponse, error)
+	InfografikDelete(ctx context.Context, in *InfografikDeleteRequest, opts ...grpc.CallOption) (*InfografikDeleteResponse, error)
 }
 
 type contentServiceClient struct {
@@ -278,6 +284,83 @@ func (c *contentServiceClient) ArticleDelete(ctx context.Context, in *ArticleDel
 	return out, nil
 }
 
+func (c *contentServiceClient) InfografikGetOne(ctx context.Context, in *InfografikGetOneRequest, opts ...grpc.CallOption) (*InfografikGetOneResponse, error) {
+	out := new(InfografikGetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/InfografikGetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) InfografikGetList(ctx context.Context, in *InfografikGetListRequest, opts ...grpc.CallOption) (*InfografikGetListResponse, error) {
+	out := new(InfografikGetListResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/InfografikGetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) InfografikGetListStream(ctx context.Context, in *InfografikGetListRequest, opts ...grpc.CallOption) (ContentService_InfografikGetListStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[0], "/contents.v1.ContentService/InfografikGetListStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &contentServiceInfografikGetListStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ContentService_InfografikGetListStreamClient interface {
+	Recv() (*InfografikGetListStreamResponse, error)
+	grpc.ClientStream
+}
+
+type contentServiceInfografikGetListStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *contentServiceInfografikGetListStreamClient) Recv() (*InfografikGetListStreamResponse, error) {
+	m := new(InfografikGetListStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *contentServiceClient) InfografikCreate(ctx context.Context, in *InfografikCreateRequest, opts ...grpc.CallOption) (*InfografikCreateResponse, error) {
+	out := new(InfografikCreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/InfografikCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) InfografikUpdate(ctx context.Context, in *InfografikUpdateRequest, opts ...grpc.CallOption) (*InfografikUpdateResponse, error) {
+	out := new(InfografikUpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/InfografikUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) InfografikDelete(ctx context.Context, in *InfografikDeleteRequest, opts ...grpc.CallOption) (*InfografikDeleteResponse, error) {
+	out := new(InfografikDeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/InfografikDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ContentServiceServer is the server API for ContentService service.
 // All implementations must embed UnimplementedContentServiceServer
 // for forward compatibility
@@ -307,6 +390,12 @@ type ContentServiceServer interface {
 	ArticleCreate(context.Context, *ArticleCreateRequest) (*ArticleCreateResponse, error)
 	ArticleUpdate(context.Context, *ArticleUpdateRequest) (*ArticleUpdateResponse, error)
 	ArticleDelete(context.Context, *ArticleDeleteRequest) (*ArticleDeleteResponse, error)
+	InfografikGetOne(context.Context, *InfografikGetOneRequest) (*InfografikGetOneResponse, error)
+	InfografikGetList(context.Context, *InfografikGetListRequest) (*InfografikGetListResponse, error)
+	InfografikGetListStream(*InfografikGetListRequest, ContentService_InfografikGetListStreamServer) error
+	InfografikCreate(context.Context, *InfografikCreateRequest) (*InfografikCreateResponse, error)
+	InfografikUpdate(context.Context, *InfografikUpdateRequest) (*InfografikUpdateResponse, error)
+	InfografikDelete(context.Context, *InfografikDeleteRequest) (*InfografikDeleteResponse, error)
 	mustEmbedUnimplementedContentServiceServer()
 }
 
@@ -388,6 +477,24 @@ func (UnimplementedContentServiceServer) ArticleUpdate(context.Context, *Article
 }
 func (UnimplementedContentServiceServer) ArticleDelete(context.Context, *ArticleDeleteRequest) (*ArticleDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ArticleDelete not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikGetOne(context.Context, *InfografikGetOneRequest) (*InfografikGetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InfografikGetOne not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikGetList(context.Context, *InfografikGetListRequest) (*InfografikGetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InfografikGetList not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikGetListStream(*InfografikGetListRequest, ContentService_InfografikGetListStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method InfografikGetListStream not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikCreate(context.Context, *InfografikCreateRequest) (*InfografikCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InfografikCreate not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikUpdate(context.Context, *InfografikUpdateRequest) (*InfografikUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InfografikUpdate not implemented")
+}
+func (UnimplementedContentServiceServer) InfografikDelete(context.Context, *InfografikDeleteRequest) (*InfografikDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InfografikDelete not implemented")
 }
 func (UnimplementedContentServiceServer) mustEmbedUnimplementedContentServiceServer() {}
 
@@ -852,6 +959,117 @@ func _ContentService_ArticleDelete_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContentService_InfografikGetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfografikGetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).InfografikGetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/InfografikGetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).InfografikGetOne(ctx, req.(*InfografikGetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_InfografikGetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfografikGetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).InfografikGetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/InfografikGetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).InfografikGetList(ctx, req.(*InfografikGetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_InfografikGetListStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(InfografikGetListRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ContentServiceServer).InfografikGetListStream(m, &contentServiceInfografikGetListStreamServer{stream})
+}
+
+type ContentService_InfografikGetListStreamServer interface {
+	Send(*InfografikGetListStreamResponse) error
+	grpc.ServerStream
+}
+
+type contentServiceInfografikGetListStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *contentServiceInfografikGetListStreamServer) Send(m *InfografikGetListStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _ContentService_InfografikCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfografikCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).InfografikCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/InfografikCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).InfografikCreate(ctx, req.(*InfografikCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_InfografikUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfografikUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).InfografikUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/InfografikUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).InfografikUpdate(ctx, req.(*InfografikUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_InfografikDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfografikDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).InfografikDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/InfografikDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).InfografikDelete(ctx, req.(*InfografikDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ContentService_ServiceDesc is the grpc.ServiceDesc for ContentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -959,7 +1177,33 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ArticleDelete",
 			Handler:    _ContentService_ArticleDelete_Handler,
 		},
+		{
+			MethodName: "InfografikGetOne",
+			Handler:    _ContentService_InfografikGetOne_Handler,
+		},
+		{
+			MethodName: "InfografikGetList",
+			Handler:    _ContentService_InfografikGetList_Handler,
+		},
+		{
+			MethodName: "InfografikCreate",
+			Handler:    _ContentService_InfografikCreate_Handler,
+		},
+		{
+			MethodName: "InfografikUpdate",
+			Handler:    _ContentService_InfografikUpdate_Handler,
+		},
+		{
+			MethodName: "InfografikDelete",
+			Handler:    _ContentService_InfografikDelete_Handler,
+		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "InfografikGetListStream",
+			Handler:       _ContentService_InfografikGetListStream_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "contents/v1/contents_service.proto",
 }
