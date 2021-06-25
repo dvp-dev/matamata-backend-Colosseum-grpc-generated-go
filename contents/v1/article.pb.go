@@ -74,6 +74,58 @@ func (ArticleStatus) EnumDescriptor() ([]byte, []int) {
 	return file_contents_v1_article_proto_rawDescGZIP(), []int{0}
 }
 
+type ArticleType int32
+
+const (
+	ArticleType_ARTICLE_TYPE_ARTICLE_UNSPECIFIED ArticleType = 0
+	ArticleType_ARTICLE_TYPE_BERITA_FOTO         ArticleType = 1
+	ArticleType_ARTICLE_TYPE_BERITA_VIDEO        ArticleType = 2
+	ArticleType_ARTICLE_TYPE_INFOGRAFIK          ArticleType = 3
+)
+
+// Enum value maps for ArticleType.
+var (
+	ArticleType_name = map[int32]string{
+		0: "ARTICLE_TYPE_ARTICLE_UNSPECIFIED",
+		1: "ARTICLE_TYPE_BERITA_FOTO",
+		2: "ARTICLE_TYPE_BERITA_VIDEO",
+		3: "ARTICLE_TYPE_INFOGRAFIK",
+	}
+	ArticleType_value = map[string]int32{
+		"ARTICLE_TYPE_ARTICLE_UNSPECIFIED": 0,
+		"ARTICLE_TYPE_BERITA_FOTO":         1,
+		"ARTICLE_TYPE_BERITA_VIDEO":        2,
+		"ARTICLE_TYPE_INFOGRAFIK":          3,
+	}
+)
+
+func (x ArticleType) Enum() *ArticleType {
+	p := new(ArticleType)
+	*p = x
+	return p
+}
+
+func (x ArticleType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ArticleType) Descriptor() protoreflect.EnumDescriptor {
+	return file_contents_v1_article_proto_enumTypes[1].Descriptor()
+}
+
+func (ArticleType) Type() protoreflect.EnumType {
+	return &file_contents_v1_article_proto_enumTypes[1]
+}
+
+func (x ArticleType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ArticleType.Descriptor instead.
+func (ArticleType) EnumDescriptor() ([]byte, []int) {
+	return file_contents_v1_article_proto_rawDescGZIP(), []int{1}
+}
+
 type ArticleSectionHomepage int32
 
 const (
@@ -119,11 +171,11 @@ func (x ArticleSectionHomepage) String() string {
 }
 
 func (ArticleSectionHomepage) Descriptor() protoreflect.EnumDescriptor {
-	return file_contents_v1_article_proto_enumTypes[1].Descriptor()
+	return file_contents_v1_article_proto_enumTypes[2].Descriptor()
 }
 
 func (ArticleSectionHomepage) Type() protoreflect.EnumType {
-	return &file_contents_v1_article_proto_enumTypes[1]
+	return &file_contents_v1_article_proto_enumTypes[2]
 }
 
 func (x ArticleSectionHomepage) Number() protoreflect.EnumNumber {
@@ -132,7 +184,7 @@ func (x ArticleSectionHomepage) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ArticleSectionHomepage.Descriptor instead.
 func (ArticleSectionHomepage) EnumDescriptor() ([]byte, []int) {
-	return file_contents_v1_article_proto_rawDescGZIP(), []int{1}
+	return file_contents_v1_article_proto_rawDescGZIP(), []int{2}
 }
 
 type ArticleCreditRole int32
@@ -168,11 +220,11 @@ func (x ArticleCreditRole) String() string {
 }
 
 func (ArticleCreditRole) Descriptor() protoreflect.EnumDescriptor {
-	return file_contents_v1_article_proto_enumTypes[2].Descriptor()
+	return file_contents_v1_article_proto_enumTypes[3].Descriptor()
 }
 
 func (ArticleCreditRole) Type() protoreflect.EnumType {
-	return &file_contents_v1_article_proto_enumTypes[2]
+	return &file_contents_v1_article_proto_enumTypes[3]
 }
 
 func (x ArticleCreditRole) Number() protoreflect.EnumNumber {
@@ -181,7 +233,7 @@ func (x ArticleCreditRole) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ArticleCreditRole.Descriptor instead.
 func (ArticleCreditRole) EnumDescriptor() ([]byte, []int) {
-	return file_contents_v1_article_proto_rawDescGZIP(), []int{2}
+	return file_contents_v1_article_proto_rawDescGZIP(), []int{3}
 }
 
 type ArticleGetListRequest_Sort int32
@@ -220,11 +272,11 @@ func (x ArticleGetListRequest_Sort) String() string {
 }
 
 func (ArticleGetListRequest_Sort) Descriptor() protoreflect.EnumDescriptor {
-	return file_contents_v1_article_proto_enumTypes[3].Descriptor()
+	return file_contents_v1_article_proto_enumTypes[4].Descriptor()
 }
 
 func (ArticleGetListRequest_Sort) Type() protoreflect.EnumType {
-	return &file_contents_v1_article_proto_enumTypes[3]
+	return &file_contents_v1_article_proto_enumTypes[4]
 }
 
 func (x ArticleGetListRequest_Sort) Number() protoreflect.EnumNumber {
@@ -1437,7 +1489,16 @@ var file_contents_v1_article_proto_rawDesc = []byte{
 	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x13, 0x0a, 0x0f, 0x41, 0x4c, 0x4c, 0x5f, 0x55, 0x4e, 0x53,
 	0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x52,
 	0x41, 0x46, 0x54, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x54, 0x52, 0x41, 0x53, 0x48, 0x10, 0x02,
-	0x12, 0x0b, 0x0a, 0x07, 0x50, 0x55, 0x42, 0x4c, 0x49, 0x53, 0x48, 0x10, 0x03, 0x2a, 0xd1, 0x02,
+	0x12, 0x0b, 0x0a, 0x07, 0x50, 0x55, 0x42, 0x4c, 0x49, 0x53, 0x48, 0x10, 0x03, 0x2a, 0x8d, 0x01,
+	0x0a, 0x0b, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x24, 0x0a,
+	0x20, 0x41, 0x52, 0x54, 0x49, 0x43, 0x4c, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x41, 0x52,
+	0x54, 0x49, 0x43, 0x4c, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45,
+	0x44, 0x10, 0x00, 0x12, 0x1c, 0x0a, 0x18, 0x41, 0x52, 0x54, 0x49, 0x43, 0x4c, 0x45, 0x5f, 0x54,
+	0x59, 0x50, 0x45, 0x5f, 0x42, 0x45, 0x52, 0x49, 0x54, 0x41, 0x5f, 0x46, 0x4f, 0x54, 0x4f, 0x10,
+	0x01, 0x12, 0x1d, 0x0a, 0x19, 0x41, 0x52, 0x54, 0x49, 0x43, 0x4c, 0x45, 0x5f, 0x54, 0x59, 0x50,
+	0x45, 0x5f, 0x42, 0x45, 0x52, 0x49, 0x54, 0x41, 0x5f, 0x56, 0x49, 0x44, 0x45, 0x4f, 0x10, 0x02,
+	0x12, 0x1b, 0x0a, 0x17, 0x41, 0x52, 0x54, 0x49, 0x43, 0x4c, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45,
+	0x5f, 0x49, 0x4e, 0x46, 0x4f, 0x47, 0x52, 0x41, 0x46, 0x49, 0x4b, 0x10, 0x03, 0x2a, 0xd1, 0x02,
 	0x0a, 0x16, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0x48, 0x6f, 0x6d, 0x65, 0x70, 0x61, 0x67, 0x65, 0x12, 0x2c, 0x0a, 0x28, 0x41, 0x52, 0x54, 0x49,
 	0x43, 0x4c, 0x45, 0x5f, 0x53, 0x45, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x48, 0x4f, 0x4d, 0x45,
@@ -1487,61 +1548,62 @@ func file_contents_v1_article_proto_rawDescGZIP() []byte {
 	return file_contents_v1_article_proto_rawDescData
 }
 
-var file_contents_v1_article_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_contents_v1_article_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_contents_v1_article_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_contents_v1_article_proto_goTypes = []interface{}{
 	(ArticleStatus)(0),                        // 0: contents.v1.ArticleStatus
-	(ArticleSectionHomepage)(0),               // 1: contents.v1.ArticleSectionHomepage
-	(ArticleCreditRole)(0),                    // 2: contents.v1.ArticleCreditRole
-	(ArticleGetListRequest_Sort)(0),           // 3: contents.v1.ArticleGetListRequest.Sort
-	(*Article)(nil),                           // 4: contents.v1.Article
-	(*ArticleCreateUpdate)(nil),               // 5: contents.v1.ArticleCreateUpdate
-	(*ArticleGetOneRequest)(nil),              // 6: contents.v1.ArticleGetOneRequest
-	(*ArticleGetOneResponse)(nil),             // 7: contents.v1.ArticleGetOneResponse
-	(*ArticleGetListRequest)(nil),             // 8: contents.v1.ArticleGetListRequest
-	(*ArticleGetListResponse)(nil),            // 9: contents.v1.ArticleGetListResponse
-	(*ArticleCreateRequest)(nil),              // 10: contents.v1.ArticleCreateRequest
-	(*ArticleCreateResponse)(nil),             // 11: contents.v1.ArticleCreateResponse
-	(*ArticleUpdateRequest)(nil),              // 12: contents.v1.ArticleUpdateRequest
-	(*ArticleUpdateResponse)(nil),             // 13: contents.v1.ArticleUpdateResponse
-	(*ArticleDeleteRequest)(nil),              // 14: contents.v1.ArticleDeleteRequest
-	(*ArticleDeleteResponse)(nil),             // 15: contents.v1.ArticleDeleteResponse
-	(*Article_ArticleCredit)(nil),             // 16: contents.v1.Article.ArticleCredit
-	(*ArticleCreateUpdate_ArticleCredit)(nil), // 17: contents.v1.ArticleCreateUpdate.ArticleCredit
-	(*timestamppb.Timestamp)(nil),             // 18: google.protobuf.Timestamp
-	(*Tag)(nil),                               // 19: contents.v1.Tag
-	(*Category1)(nil),                         // 20: contents.v1.Category1
-	(*Category2)(nil),                         // 21: contents.v1.Category2
-	(*Category3)(nil),                         // 22: contents.v1.Category3
-	(*v1.Admin)(nil),                          // 23: admin.v1.Admin
+	(ArticleType)(0),                          // 1: contents.v1.ArticleType
+	(ArticleSectionHomepage)(0),               // 2: contents.v1.ArticleSectionHomepage
+	(ArticleCreditRole)(0),                    // 3: contents.v1.ArticleCreditRole
+	(ArticleGetListRequest_Sort)(0),           // 4: contents.v1.ArticleGetListRequest.Sort
+	(*Article)(nil),                           // 5: contents.v1.Article
+	(*ArticleCreateUpdate)(nil),               // 6: contents.v1.ArticleCreateUpdate
+	(*ArticleGetOneRequest)(nil),              // 7: contents.v1.ArticleGetOneRequest
+	(*ArticleGetOneResponse)(nil),             // 8: contents.v1.ArticleGetOneResponse
+	(*ArticleGetListRequest)(nil),             // 9: contents.v1.ArticleGetListRequest
+	(*ArticleGetListResponse)(nil),            // 10: contents.v1.ArticleGetListResponse
+	(*ArticleCreateRequest)(nil),              // 11: contents.v1.ArticleCreateRequest
+	(*ArticleCreateResponse)(nil),             // 12: contents.v1.ArticleCreateResponse
+	(*ArticleUpdateRequest)(nil),              // 13: contents.v1.ArticleUpdateRequest
+	(*ArticleUpdateResponse)(nil),             // 14: contents.v1.ArticleUpdateResponse
+	(*ArticleDeleteRequest)(nil),              // 15: contents.v1.ArticleDeleteRequest
+	(*ArticleDeleteResponse)(nil),             // 16: contents.v1.ArticleDeleteResponse
+	(*Article_ArticleCredit)(nil),             // 17: contents.v1.Article.ArticleCredit
+	(*ArticleCreateUpdate_ArticleCredit)(nil), // 18: contents.v1.ArticleCreateUpdate.ArticleCredit
+	(*timestamppb.Timestamp)(nil),             // 19: google.protobuf.Timestamp
+	(*Tag)(nil),                               // 20: contents.v1.Tag
+	(*Category1)(nil),                         // 21: contents.v1.Category1
+	(*Category2)(nil),                         // 22: contents.v1.Category2
+	(*Category3)(nil),                         // 23: contents.v1.Category3
+	(*v1.Admin)(nil),                          // 24: admin.v1.Admin
 }
 var file_contents_v1_article_proto_depIdxs = []int32{
 	0,  // 0: contents.v1.Article.status:type_name -> contents.v1.ArticleStatus
-	1,  // 1: contents.v1.Article.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
-	18, // 2: contents.v1.Article.created_at:type_name -> google.protobuf.Timestamp
-	18, // 3: contents.v1.Article.updated_at:type_name -> google.protobuf.Timestamp
-	19, // 4: contents.v1.Article.tags:type_name -> contents.v1.Tag
-	20, // 5: contents.v1.Article.category1:type_name -> contents.v1.Category1
-	21, // 6: contents.v1.Article.category2:type_name -> contents.v1.Category2
-	22, // 7: contents.v1.Article.category3:type_name -> contents.v1.Category3
-	16, // 8: contents.v1.Article.credits:type_name -> contents.v1.Article.ArticleCredit
+	2,  // 1: contents.v1.Article.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
+	19, // 2: contents.v1.Article.created_at:type_name -> google.protobuf.Timestamp
+	19, // 3: contents.v1.Article.updated_at:type_name -> google.protobuf.Timestamp
+	20, // 4: contents.v1.Article.tags:type_name -> contents.v1.Tag
+	21, // 5: contents.v1.Article.category1:type_name -> contents.v1.Category1
+	22, // 6: contents.v1.Article.category2:type_name -> contents.v1.Category2
+	23, // 7: contents.v1.Article.category3:type_name -> contents.v1.Category3
+	17, // 8: contents.v1.Article.credits:type_name -> contents.v1.Article.ArticleCredit
 	0,  // 9: contents.v1.ArticleCreateUpdate.status:type_name -> contents.v1.ArticleStatus
-	1,  // 10: contents.v1.ArticleCreateUpdate.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
-	17, // 11: contents.v1.ArticleCreateUpdate.credits:type_name -> contents.v1.ArticleCreateUpdate.ArticleCredit
-	4,  // 12: contents.v1.ArticleGetOneResponse.article:type_name -> contents.v1.Article
+	2,  // 10: contents.v1.ArticleCreateUpdate.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
+	18, // 11: contents.v1.ArticleCreateUpdate.credits:type_name -> contents.v1.ArticleCreateUpdate.ArticleCredit
+	5,  // 12: contents.v1.ArticleGetOneResponse.article:type_name -> contents.v1.Article
 	0,  // 13: contents.v1.ArticleGetListRequest.status:type_name -> contents.v1.ArticleStatus
 	0,  // 14: contents.v1.ArticleGetListRequest.status_multiple:type_name -> contents.v1.ArticleStatus
-	1,  // 15: contents.v1.ArticleGetListRequest.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
-	3,  // 16: contents.v1.ArticleGetListRequest.sort_by:type_name -> contents.v1.ArticleGetListRequest.Sort
-	4,  // 17: contents.v1.ArticleGetListResponse.data:type_name -> contents.v1.Article
-	5,  // 18: contents.v1.ArticleCreateRequest.data:type_name -> contents.v1.ArticleCreateUpdate
-	4,  // 19: contents.v1.ArticleCreateResponse.data:type_name -> contents.v1.Article
-	5,  // 20: contents.v1.ArticleUpdateRequest.data:type_name -> contents.v1.ArticleCreateUpdate
-	4,  // 21: contents.v1.ArticleUpdateResponse.data:type_name -> contents.v1.Article
-	4,  // 22: contents.v1.ArticleDeleteResponse.data:type_name -> contents.v1.Article
-	2,  // 23: contents.v1.Article.ArticleCredit.role:type_name -> contents.v1.ArticleCreditRole
-	23, // 24: contents.v1.Article.ArticleCredit.admin:type_name -> admin.v1.Admin
-	2,  // 25: contents.v1.ArticleCreateUpdate.ArticleCredit.role:type_name -> contents.v1.ArticleCreditRole
+	2,  // 15: contents.v1.ArticleGetListRequest.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
+	4,  // 16: contents.v1.ArticleGetListRequest.sort_by:type_name -> contents.v1.ArticleGetListRequest.Sort
+	5,  // 17: contents.v1.ArticleGetListResponse.data:type_name -> contents.v1.Article
+	6,  // 18: contents.v1.ArticleCreateRequest.data:type_name -> contents.v1.ArticleCreateUpdate
+	5,  // 19: contents.v1.ArticleCreateResponse.data:type_name -> contents.v1.Article
+	6,  // 20: contents.v1.ArticleUpdateRequest.data:type_name -> contents.v1.ArticleCreateUpdate
+	5,  // 21: contents.v1.ArticleUpdateResponse.data:type_name -> contents.v1.Article
+	5,  // 22: contents.v1.ArticleDeleteResponse.data:type_name -> contents.v1.Article
+	3,  // 23: contents.v1.Article.ArticleCredit.role:type_name -> contents.v1.ArticleCreditRole
+	24, // 24: contents.v1.Article.ArticleCredit.admin:type_name -> admin.v1.Admin
+	3,  // 25: contents.v1.ArticleCreateUpdate.ArticleCredit.role:type_name -> contents.v1.ArticleCreditRole
 	26, // [26:26] is the sub-list for method output_type
 	26, // [26:26] is the sub-list for method input_type
 	26, // [26:26] is the sub-list for extension type_name
@@ -1731,7 +1793,7 @@ func file_contents_v1_article_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_contents_v1_article_proto_rawDesc,
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
