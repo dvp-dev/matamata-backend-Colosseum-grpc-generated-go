@@ -49,6 +49,18 @@ type ContentServiceClient interface {
 	InfografikCreate(ctx context.Context, in *InfografikCreateRequest, opts ...grpc.CallOption) (*InfografikCreateResponse, error)
 	InfografikUpdate(ctx context.Context, in *InfografikUpdateRequest, opts ...grpc.CallOption) (*InfografikUpdateResponse, error)
 	InfografikDelete(ctx context.Context, in *InfografikDeleteRequest, opts ...grpc.CallOption) (*InfografikDeleteResponse, error)
+	NewsPhotoGetOne(ctx context.Context, in *NewsPhotoGetOneRequest, opts ...grpc.CallOption) (*NewsPhotoGetOneResponse, error)
+	NewsPhotoGetList(ctx context.Context, in *NewsPhotoGetListRequest, opts ...grpc.CallOption) (*NewsPhotoGetListResponse, error)
+	NewsPhotoGetListStream(ctx context.Context, in *NewsPhotoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsPhotoGetListStreamClient, error)
+	NewsPhotoCreate(ctx context.Context, in *NewsPhotoCreateRequest, opts ...grpc.CallOption) (*NewsPhotoCreateResponse, error)
+	NewsPhotoUpdate(ctx context.Context, in *NewsPhotoUpdateRequest, opts ...grpc.CallOption) (*NewsPhotoUpdateResponse, error)
+	NewsPhotoDelete(ctx context.Context, in *NewsPhotoDeleteRequest, opts ...grpc.CallOption) (*NewsPhotoDeleteResponse, error)
+	NewsVideoGetOne(ctx context.Context, in *NewsVideoGetOneRequest, opts ...grpc.CallOption) (*NewsVideoGetOneResponse, error)
+	NewsVideoGetList(ctx context.Context, in *NewsVideoGetListRequest, opts ...grpc.CallOption) (*NewsVideoGetListResponse, error)
+	NewsVideoGetListStream(ctx context.Context, in *NewsVideoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsVideoGetListStreamClient, error)
+	NewsVideoCreate(ctx context.Context, in *NewsVideoCreateRequest, opts ...grpc.CallOption) (*NewsVideoCreateResponse, error)
+	NewsVideoUpdate(ctx context.Context, in *NewsVideoUpdateRequest, opts ...grpc.CallOption) (*NewsVideoUpdateResponse, error)
+	NewsVideoDelete(ctx context.Context, in *NewsVideoDeleteRequest, opts ...grpc.CallOption) (*NewsVideoDeleteResponse, error)
 }
 
 type contentServiceClient struct {
@@ -361,6 +373,160 @@ func (c *contentServiceClient) InfografikDelete(ctx context.Context, in *Infogra
 	return out, nil
 }
 
+func (c *contentServiceClient) NewsPhotoGetOne(ctx context.Context, in *NewsPhotoGetOneRequest, opts ...grpc.CallOption) (*NewsPhotoGetOneResponse, error) {
+	out := new(NewsPhotoGetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsPhotoGetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsPhotoGetList(ctx context.Context, in *NewsPhotoGetListRequest, opts ...grpc.CallOption) (*NewsPhotoGetListResponse, error) {
+	out := new(NewsPhotoGetListResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsPhotoGetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsPhotoGetListStream(ctx context.Context, in *NewsPhotoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsPhotoGetListStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[1], "/contents.v1.ContentService/NewsPhotoGetListStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &contentServiceNewsPhotoGetListStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ContentService_NewsPhotoGetListStreamClient interface {
+	Recv() (*NewsPhotoGetListStreamResponse, error)
+	grpc.ClientStream
+}
+
+type contentServiceNewsPhotoGetListStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *contentServiceNewsPhotoGetListStreamClient) Recv() (*NewsPhotoGetListStreamResponse, error) {
+	m := new(NewsPhotoGetListStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *contentServiceClient) NewsPhotoCreate(ctx context.Context, in *NewsPhotoCreateRequest, opts ...grpc.CallOption) (*NewsPhotoCreateResponse, error) {
+	out := new(NewsPhotoCreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsPhotoCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsPhotoUpdate(ctx context.Context, in *NewsPhotoUpdateRequest, opts ...grpc.CallOption) (*NewsPhotoUpdateResponse, error) {
+	out := new(NewsPhotoUpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsPhotoUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsPhotoDelete(ctx context.Context, in *NewsPhotoDeleteRequest, opts ...grpc.CallOption) (*NewsPhotoDeleteResponse, error) {
+	out := new(NewsPhotoDeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsPhotoDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsVideoGetOne(ctx context.Context, in *NewsVideoGetOneRequest, opts ...grpc.CallOption) (*NewsVideoGetOneResponse, error) {
+	out := new(NewsVideoGetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsVideoGetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsVideoGetList(ctx context.Context, in *NewsVideoGetListRequest, opts ...grpc.CallOption) (*NewsVideoGetListResponse, error) {
+	out := new(NewsVideoGetListResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsVideoGetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsVideoGetListStream(ctx context.Context, in *NewsVideoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsVideoGetListStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[2], "/contents.v1.ContentService/NewsVideoGetListStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &contentServiceNewsVideoGetListStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ContentService_NewsVideoGetListStreamClient interface {
+	Recv() (*NewsVideoGetListStreamResponse, error)
+	grpc.ClientStream
+}
+
+type contentServiceNewsVideoGetListStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *contentServiceNewsVideoGetListStreamClient) Recv() (*NewsVideoGetListStreamResponse, error) {
+	m := new(NewsVideoGetListStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *contentServiceClient) NewsVideoCreate(ctx context.Context, in *NewsVideoCreateRequest, opts ...grpc.CallOption) (*NewsVideoCreateResponse, error) {
+	out := new(NewsVideoCreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsVideoCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsVideoUpdate(ctx context.Context, in *NewsVideoUpdateRequest, opts ...grpc.CallOption) (*NewsVideoUpdateResponse, error) {
+	out := new(NewsVideoUpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsVideoUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) NewsVideoDelete(ctx context.Context, in *NewsVideoDeleteRequest, opts ...grpc.CallOption) (*NewsVideoDeleteResponse, error) {
+	out := new(NewsVideoDeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/NewsVideoDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ContentServiceServer is the server API for ContentService service.
 // All implementations must embed UnimplementedContentServiceServer
 // for forward compatibility
@@ -396,6 +562,18 @@ type ContentServiceServer interface {
 	InfografikCreate(context.Context, *InfografikCreateRequest) (*InfografikCreateResponse, error)
 	InfografikUpdate(context.Context, *InfografikUpdateRequest) (*InfografikUpdateResponse, error)
 	InfografikDelete(context.Context, *InfografikDeleteRequest) (*InfografikDeleteResponse, error)
+	NewsPhotoGetOne(context.Context, *NewsPhotoGetOneRequest) (*NewsPhotoGetOneResponse, error)
+	NewsPhotoGetList(context.Context, *NewsPhotoGetListRequest) (*NewsPhotoGetListResponse, error)
+	NewsPhotoGetListStream(*NewsPhotoGetListRequest, ContentService_NewsPhotoGetListStreamServer) error
+	NewsPhotoCreate(context.Context, *NewsPhotoCreateRequest) (*NewsPhotoCreateResponse, error)
+	NewsPhotoUpdate(context.Context, *NewsPhotoUpdateRequest) (*NewsPhotoUpdateResponse, error)
+	NewsPhotoDelete(context.Context, *NewsPhotoDeleteRequest) (*NewsPhotoDeleteResponse, error)
+	NewsVideoGetOne(context.Context, *NewsVideoGetOneRequest) (*NewsVideoGetOneResponse, error)
+	NewsVideoGetList(context.Context, *NewsVideoGetListRequest) (*NewsVideoGetListResponse, error)
+	NewsVideoGetListStream(*NewsVideoGetListRequest, ContentService_NewsVideoGetListStreamServer) error
+	NewsVideoCreate(context.Context, *NewsVideoCreateRequest) (*NewsVideoCreateResponse, error)
+	NewsVideoUpdate(context.Context, *NewsVideoUpdateRequest) (*NewsVideoUpdateResponse, error)
+	NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error)
 	mustEmbedUnimplementedContentServiceServer()
 }
 
@@ -495,6 +673,42 @@ func (UnimplementedContentServiceServer) InfografikUpdate(context.Context, *Info
 }
 func (UnimplementedContentServiceServer) InfografikDelete(context.Context, *InfografikDeleteRequest) (*InfografikDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InfografikDelete not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoGetOne(context.Context, *NewsPhotoGetOneRequest) (*NewsPhotoGetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsPhotoGetOne not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoGetList(context.Context, *NewsPhotoGetListRequest) (*NewsPhotoGetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsPhotoGetList not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoGetListStream(*NewsPhotoGetListRequest, ContentService_NewsPhotoGetListStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method NewsPhotoGetListStream not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoCreate(context.Context, *NewsPhotoCreateRequest) (*NewsPhotoCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsPhotoCreate not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoUpdate(context.Context, *NewsPhotoUpdateRequest) (*NewsPhotoUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsPhotoUpdate not implemented")
+}
+func (UnimplementedContentServiceServer) NewsPhotoDelete(context.Context, *NewsPhotoDeleteRequest) (*NewsPhotoDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsPhotoDelete not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoGetOne(context.Context, *NewsVideoGetOneRequest) (*NewsVideoGetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoGetOne not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoGetList(context.Context, *NewsVideoGetListRequest) (*NewsVideoGetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoGetList not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoGetListStream(*NewsVideoGetListRequest, ContentService_NewsVideoGetListStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method NewsVideoGetListStream not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoCreate(context.Context, *NewsVideoCreateRequest) (*NewsVideoCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoCreate not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoUpdate(context.Context, *NewsVideoUpdateRequest) (*NewsVideoUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoUpdate not implemented")
+}
+func (UnimplementedContentServiceServer) NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoDelete not implemented")
 }
 func (UnimplementedContentServiceServer) mustEmbedUnimplementedContentServiceServer() {}
 
@@ -1070,6 +1284,228 @@ func _ContentService_InfografikDelete_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContentService_NewsPhotoGetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsPhotoGetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsPhotoGetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsPhotoGetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsPhotoGetOne(ctx, req.(*NewsPhotoGetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsPhotoGetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsPhotoGetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsPhotoGetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsPhotoGetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsPhotoGetList(ctx, req.(*NewsPhotoGetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsPhotoGetListStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(NewsPhotoGetListRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ContentServiceServer).NewsPhotoGetListStream(m, &contentServiceNewsPhotoGetListStreamServer{stream})
+}
+
+type ContentService_NewsPhotoGetListStreamServer interface {
+	Send(*NewsPhotoGetListStreamResponse) error
+	grpc.ServerStream
+}
+
+type contentServiceNewsPhotoGetListStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *contentServiceNewsPhotoGetListStreamServer) Send(m *NewsPhotoGetListStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _ContentService_NewsPhotoCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsPhotoCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsPhotoCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsPhotoCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsPhotoCreate(ctx, req.(*NewsPhotoCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsPhotoUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsPhotoUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsPhotoUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsPhotoUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsPhotoUpdate(ctx, req.(*NewsPhotoUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsPhotoDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsPhotoDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsPhotoDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsPhotoDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsPhotoDelete(ctx, req.(*NewsPhotoDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsVideoGetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsVideoGetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsVideoGetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsVideoGetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsVideoGetOne(ctx, req.(*NewsVideoGetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsVideoGetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsVideoGetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsVideoGetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsVideoGetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsVideoGetList(ctx, req.(*NewsVideoGetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsVideoGetListStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(NewsVideoGetListRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ContentServiceServer).NewsVideoGetListStream(m, &contentServiceNewsVideoGetListStreamServer{stream})
+}
+
+type ContentService_NewsVideoGetListStreamServer interface {
+	Send(*NewsVideoGetListStreamResponse) error
+	grpc.ServerStream
+}
+
+type contentServiceNewsVideoGetListStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *contentServiceNewsVideoGetListStreamServer) Send(m *NewsVideoGetListStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _ContentService_NewsVideoCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsVideoCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsVideoCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsVideoCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsVideoCreate(ctx, req.(*NewsVideoCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsVideoUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsVideoUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsVideoUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsVideoUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsVideoUpdate(ctx, req.(*NewsVideoUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_NewsVideoDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NewsVideoDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).NewsVideoDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/NewsVideoDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).NewsVideoDelete(ctx, req.(*NewsVideoDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ContentService_ServiceDesc is the grpc.ServiceDesc for ContentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1197,11 +1633,61 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "InfografikDelete",
 			Handler:    _ContentService_InfografikDelete_Handler,
 		},
+		{
+			MethodName: "NewsPhotoGetOne",
+			Handler:    _ContentService_NewsPhotoGetOne_Handler,
+		},
+		{
+			MethodName: "NewsPhotoGetList",
+			Handler:    _ContentService_NewsPhotoGetList_Handler,
+		},
+		{
+			MethodName: "NewsPhotoCreate",
+			Handler:    _ContentService_NewsPhotoCreate_Handler,
+		},
+		{
+			MethodName: "NewsPhotoUpdate",
+			Handler:    _ContentService_NewsPhotoUpdate_Handler,
+		},
+		{
+			MethodName: "NewsPhotoDelete",
+			Handler:    _ContentService_NewsPhotoDelete_Handler,
+		},
+		{
+			MethodName: "NewsVideoGetOne",
+			Handler:    _ContentService_NewsVideoGetOne_Handler,
+		},
+		{
+			MethodName: "NewsVideoGetList",
+			Handler:    _ContentService_NewsVideoGetList_Handler,
+		},
+		{
+			MethodName: "NewsVideoCreate",
+			Handler:    _ContentService_NewsVideoCreate_Handler,
+		},
+		{
+			MethodName: "NewsVideoUpdate",
+			Handler:    _ContentService_NewsVideoUpdate_Handler,
+		},
+		{
+			MethodName: "NewsVideoDelete",
+			Handler:    _ContentService_NewsVideoDelete_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "InfografikGetListStream",
 			Handler:       _ContentService_InfografikGetListStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "NewsPhotoGetListStream",
+			Handler:       _ContentService_NewsPhotoGetListStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "NewsVideoGetListStream",
+			Handler:       _ContentService_NewsVideoGetListStream_Handler,
 			ServerStreams: true,
 		},
 	},
