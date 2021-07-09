@@ -620,6 +620,7 @@ type NewsVideoGetListRequest struct {
 
 	Status          ArticleStatus                `protobuf:"varint,1,opt,name=status,proto3,enum=contents.v1.ArticleStatus" json:"status,omitempty"`
 	StatusMultiple  []ArticleStatus              `protobuf:"varint,9,rep,packed,name=status_multiple,json=statusMultiple,proto3,enum=contents.v1.ArticleStatus" json:"status_multiple,omitempty"`
+	Types           []ArticleType                `protobuf:"varint,11,rep,packed,name=types,proto3,enum=contents.v1.ArticleType" json:"types,omitempty"`
 	SectionHomepage ArticleSectionHomepage       `protobuf:"varint,10,opt,name=section_homepage,json=sectionHomepage,proto3,enum=contents.v1.ArticleSectionHomepage" json:"section_homepage,omitempty"`
 	CategoryId_1    int32                        `protobuf:"varint,2,opt,name=category_id_1,json=categoryId1,proto3" json:"category_id_1,omitempty"`
 	CategoryId_2    int32                        `protobuf:"varint,3,opt,name=category_id_2,json=categoryId2,proto3" json:"category_id_2,omitempty"`
@@ -672,6 +673,13 @@ func (x *NewsVideoGetListRequest) GetStatus() ArticleStatus {
 func (x *NewsVideoGetListRequest) GetStatusMultiple() []ArticleStatus {
 	if x != nil {
 		return x.StatusMultiple
+	}
+	return nil
+}
+
+func (x *NewsVideoGetListRequest) GetTypes() []ArticleType {
+	if x != nil {
+		return x.Types
 	}
 	return nil
 }
@@ -1285,7 +1293,7 @@ var file_contents_v1_news_video_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x04, 0x64, 0x61,
 	0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65,
 	0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x65, 0x77, 0x73, 0x56, 0x69, 0x64, 0x65, 0x6f,
-	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xbf, 0x04, 0x0a, 0x17, 0x4e, 0x65, 0x77, 0x73, 0x56,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xef, 0x04, 0x0a, 0x17, 0x4e, 0x65, 0x77, 0x73, 0x56,
 	0x69, 0x64, 0x65, 0x6f, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x32, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31,
@@ -1294,7 +1302,10 @@ var file_contents_v1_news_video_proto_rawDesc = []byte{
 	0x5f, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0e, 0x32,
 	0x1a, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72,
 	0x74, 0x69, 0x63, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x0e, 0x73, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x12, 0x4e, 0x0a, 0x10, 0x73,
+	0x74, 0x75, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x65, 0x12, 0x2e, 0x0a, 0x05, 0x74,
+	0x79, 0x70, 0x65, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65,
+	0x54, 0x79, 0x70, 0x65, 0x52, 0x05, 0x74, 0x79, 0x70, 0x65, 0x73, 0x12, 0x4e, 0x0a, 0x10, 0x73,
 	0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x68, 0x6f, 0x6d, 0x65, 0x70, 0x61, 0x67, 0x65, 0x18,
 	0x0a, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x23, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x73,
 	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x53, 0x65, 0x63, 0x74, 0x69,
@@ -1436,20 +1447,21 @@ var file_contents_v1_news_video_proto_depIdxs = []int32{
 	2,  // 17: contents.v1.NewsVideoGetOneResponse.data:type_name -> contents.v1.NewsVideo
 	16, // 18: contents.v1.NewsVideoGetListRequest.status:type_name -> contents.v1.ArticleStatus
 	16, // 19: contents.v1.NewsVideoGetListRequest.status_multiple:type_name -> contents.v1.ArticleStatus
-	17, // 20: contents.v1.NewsVideoGetListRequest.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
-	0,  // 21: contents.v1.NewsVideoGetListRequest.sort_by:type_name -> contents.v1.NewsVideoGetListRequest.Sort
-	2,  // 22: contents.v1.NewsVideoGetListResponse.data:type_name -> contents.v1.NewsVideo
-	2,  // 23: contents.v1.NewsVideoGetListStreamResponse.data:type_name -> contents.v1.NewsVideo
-	3,  // 24: contents.v1.NewsVideoCreateRequest.data:type_name -> contents.v1.NewsVideoCreateUpdate
-	2,  // 25: contents.v1.NewsVideoCreateResponse.data:type_name -> contents.v1.NewsVideo
-	3,  // 26: contents.v1.NewsVideoUpdateRequest.data:type_name -> contents.v1.NewsVideoCreateUpdate
-	2,  // 27: contents.v1.NewsVideoUpdateResponse.data:type_name -> contents.v1.NewsVideo
-	2,  // 28: contents.v1.NewsVideoDeleteResponse.data:type_name -> contents.v1.NewsVideo
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	15, // 20: contents.v1.NewsVideoGetListRequest.types:type_name -> contents.v1.ArticleType
+	17, // 21: contents.v1.NewsVideoGetListRequest.section_homepage:type_name -> contents.v1.ArticleSectionHomepage
+	0,  // 22: contents.v1.NewsVideoGetListRequest.sort_by:type_name -> contents.v1.NewsVideoGetListRequest.Sort
+	2,  // 23: contents.v1.NewsVideoGetListResponse.data:type_name -> contents.v1.NewsVideo
+	2,  // 24: contents.v1.NewsVideoGetListStreamResponse.data:type_name -> contents.v1.NewsVideo
+	3,  // 25: contents.v1.NewsVideoCreateRequest.data:type_name -> contents.v1.NewsVideoCreateUpdate
+	2,  // 26: contents.v1.NewsVideoCreateResponse.data:type_name -> contents.v1.NewsVideo
+	3,  // 27: contents.v1.NewsVideoUpdateRequest.data:type_name -> contents.v1.NewsVideoCreateUpdate
+	2,  // 28: contents.v1.NewsVideoUpdateResponse.data:type_name -> contents.v1.NewsVideo
+	2,  // 29: contents.v1.NewsVideoDeleteResponse.data:type_name -> contents.v1.NewsVideo
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_contents_v1_news_video_proto_init() }
