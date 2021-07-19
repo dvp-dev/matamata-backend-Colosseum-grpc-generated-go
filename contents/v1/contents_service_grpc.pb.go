@@ -61,6 +61,11 @@ type ContentServiceClient interface {
 	NewsVideoCreate(ctx context.Context, in *NewsVideoCreateRequest, opts ...grpc.CallOption) (*NewsVideoCreateResponse, error)
 	NewsVideoUpdate(ctx context.Context, in *NewsVideoUpdateRequest, opts ...grpc.CallOption) (*NewsVideoUpdateResponse, error)
 	NewsVideoDelete(ctx context.Context, in *NewsVideoDeleteRequest, opts ...grpc.CallOption) (*NewsVideoDeleteResponse, error)
+	PollingGetOne(ctx context.Context, in *PollingGetOneRequest, opts ...grpc.CallOption) (*PollingGetOneResponse, error)
+	PollingGetList(ctx context.Context, in *PollingGetListRequest, opts ...grpc.CallOption) (*PollingGetListResponse, error)
+	PollingCreate(ctx context.Context, in *PollingCreateRequest, opts ...grpc.CallOption) (*PollingCreateResponse, error)
+	PollingUpdate(ctx context.Context, in *PollingUpdateRequest, opts ...grpc.CallOption) (*PollingUpdateResponse, error)
+	PollingDelete(ctx context.Context, in *PollingDeleteRequest, opts ...grpc.CallOption) (*PollingDeleteResponse, error)
 }
 
 type contentServiceClient struct {
@@ -527,6 +532,51 @@ func (c *contentServiceClient) NewsVideoDelete(ctx context.Context, in *NewsVide
 	return out, nil
 }
 
+func (c *contentServiceClient) PollingGetOne(ctx context.Context, in *PollingGetOneRequest, opts ...grpc.CallOption) (*PollingGetOneResponse, error) {
+	out := new(PollingGetOneResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingGetOne", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) PollingGetList(ctx context.Context, in *PollingGetListRequest, opts ...grpc.CallOption) (*PollingGetListResponse, error) {
+	out := new(PollingGetListResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingGetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) PollingCreate(ctx context.Context, in *PollingCreateRequest, opts ...grpc.CallOption) (*PollingCreateResponse, error) {
+	out := new(PollingCreateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingCreate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) PollingUpdate(ctx context.Context, in *PollingUpdateRequest, opts ...grpc.CallOption) (*PollingUpdateResponse, error) {
+	out := new(PollingUpdateResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingUpdate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) PollingDelete(ctx context.Context, in *PollingDeleteRequest, opts ...grpc.CallOption) (*PollingDeleteResponse, error) {
+	out := new(PollingDeleteResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ContentServiceServer is the server API for ContentService service.
 // All implementations must embed UnimplementedContentServiceServer
 // for forward compatibility
@@ -574,6 +624,11 @@ type ContentServiceServer interface {
 	NewsVideoCreate(context.Context, *NewsVideoCreateRequest) (*NewsVideoCreateResponse, error)
 	NewsVideoUpdate(context.Context, *NewsVideoUpdateRequest) (*NewsVideoUpdateResponse, error)
 	NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error)
+	PollingGetOne(context.Context, *PollingGetOneRequest) (*PollingGetOneResponse, error)
+	PollingGetList(context.Context, *PollingGetListRequest) (*PollingGetListResponse, error)
+	PollingCreate(context.Context, *PollingCreateRequest) (*PollingCreateResponse, error)
+	PollingUpdate(context.Context, *PollingUpdateRequest) (*PollingUpdateResponse, error)
+	PollingDelete(context.Context, *PollingDeleteRequest) (*PollingDeleteResponse, error)
 	mustEmbedUnimplementedContentServiceServer()
 }
 
@@ -709,6 +764,21 @@ func (UnimplementedContentServiceServer) NewsVideoUpdate(context.Context, *NewsV
 }
 func (UnimplementedContentServiceServer) NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoDelete not implemented")
+}
+func (UnimplementedContentServiceServer) PollingGetOne(context.Context, *PollingGetOneRequest) (*PollingGetOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollingGetOne not implemented")
+}
+func (UnimplementedContentServiceServer) PollingGetList(context.Context, *PollingGetListRequest) (*PollingGetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollingGetList not implemented")
+}
+func (UnimplementedContentServiceServer) PollingCreate(context.Context, *PollingCreateRequest) (*PollingCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollingCreate not implemented")
+}
+func (UnimplementedContentServiceServer) PollingUpdate(context.Context, *PollingUpdateRequest) (*PollingUpdateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollingUpdate not implemented")
+}
+func (UnimplementedContentServiceServer) PollingDelete(context.Context, *PollingDeleteRequest) (*PollingDeleteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PollingDelete not implemented")
 }
 func (UnimplementedContentServiceServer) mustEmbedUnimplementedContentServiceServer() {}
 
@@ -1506,6 +1576,96 @@ func _ContentService_NewsVideoDelete_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContentService_PollingGetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollingGetOneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).PollingGetOne(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/PollingGetOne",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).PollingGetOne(ctx, req.(*PollingGetOneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_PollingGetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollingGetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).PollingGetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/PollingGetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).PollingGetList(ctx, req.(*PollingGetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_PollingCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollingCreateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).PollingCreate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/PollingCreate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).PollingCreate(ctx, req.(*PollingCreateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_PollingUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollingUpdateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).PollingUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/PollingUpdate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).PollingUpdate(ctx, req.(*PollingUpdateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_PollingDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PollingDeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).PollingDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/PollingDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).PollingDelete(ctx, req.(*PollingDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ContentService_ServiceDesc is the grpc.ServiceDesc for ContentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1672,6 +1832,26 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NewsVideoDelete",
 			Handler:    _ContentService_NewsVideoDelete_Handler,
+		},
+		{
+			MethodName: "PollingGetOne",
+			Handler:    _ContentService_PollingGetOne_Handler,
+		},
+		{
+			MethodName: "PollingGetList",
+			Handler:    _ContentService_PollingGetList_Handler,
+		},
+		{
+			MethodName: "PollingCreate",
+			Handler:    _ContentService_PollingCreate_Handler,
+		},
+		{
+			MethodName: "PollingUpdate",
+			Handler:    _ContentService_PollingUpdate_Handler,
+		},
+		{
+			MethodName: "PollingDelete",
+			Handler:    _ContentService_PollingDelete_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
