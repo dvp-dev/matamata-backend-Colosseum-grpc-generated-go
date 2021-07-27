@@ -40,6 +40,7 @@ type ContentServiceClient interface {
 	Category3Delete(ctx context.Context, in *Category3DeleteRequest, opts ...grpc.CallOption) (*Category3DeleteResponse, error)
 	ArticleGetOne(ctx context.Context, in *ArticleGetOneRequest, opts ...grpc.CallOption) (*ArticleGetOneResponse, error)
 	ArticleGetList(ctx context.Context, in *ArticleGetListRequest, opts ...grpc.CallOption) (*ArticleGetListResponse, error)
+	ArticleGetListStream(ctx context.Context, in *ArticleGetListRequest, opts ...grpc.CallOption) (ContentService_ArticleGetListStreamClient, error)
 	ArticleCreate(ctx context.Context, in *ArticleCreateRequest, opts ...grpc.CallOption) (*ArticleCreateResponse, error)
 	ArticleUpdate(ctx context.Context, in *ArticleUpdateRequest, opts ...grpc.CallOption) (*ArticleUpdateResponse, error)
 	ArticleDelete(ctx context.Context, in *ArticleDeleteRequest, opts ...grpc.CallOption) (*ArticleDeleteResponse, error)
@@ -274,6 +275,38 @@ func (c *contentServiceClient) ArticleGetList(ctx context.Context, in *ArticleGe
 	return out, nil
 }
 
+func (c *contentServiceClient) ArticleGetListStream(ctx context.Context, in *ArticleGetListRequest, opts ...grpc.CallOption) (ContentService_ArticleGetListStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[0], "/contents.v1.ContentService/ArticleGetListStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &contentServiceArticleGetListStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ContentService_ArticleGetListStreamClient interface {
+	Recv() (*ArticleGetListStreamResponse, error)
+	grpc.ClientStream
+}
+
+type contentServiceArticleGetListStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *contentServiceArticleGetListStreamClient) Recv() (*ArticleGetListStreamResponse, error) {
+	m := new(ArticleGetListStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *contentServiceClient) ArticleCreate(ctx context.Context, in *ArticleCreateRequest, opts ...grpc.CallOption) (*ArticleCreateResponse, error) {
 	out := new(ArticleCreateResponse)
 	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/ArticleCreate", in, out, opts...)
@@ -320,7 +353,7 @@ func (c *contentServiceClient) InfografikGetList(ctx context.Context, in *Infogr
 }
 
 func (c *contentServiceClient) InfografikGetListStream(ctx context.Context, in *InfografikGetListRequest, opts ...grpc.CallOption) (ContentService_InfografikGetListStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[0], "/contents.v1.ContentService/InfografikGetListStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[1], "/contents.v1.ContentService/InfografikGetListStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -397,7 +430,7 @@ func (c *contentServiceClient) NewsPhotoGetList(ctx context.Context, in *NewsPho
 }
 
 func (c *contentServiceClient) NewsPhotoGetListStream(ctx context.Context, in *NewsPhotoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsPhotoGetListStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[1], "/contents.v1.ContentService/NewsPhotoGetListStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[2], "/contents.v1.ContentService/NewsPhotoGetListStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -474,7 +507,7 @@ func (c *contentServiceClient) NewsVideoGetList(ctx context.Context, in *NewsVid
 }
 
 func (c *contentServiceClient) NewsVideoGetListStream(ctx context.Context, in *NewsVideoGetListRequest, opts ...grpc.CallOption) (ContentService_NewsVideoGetListStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[2], "/contents.v1.ContentService/NewsVideoGetListStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &ContentService_ServiceDesc.Streams[3], "/contents.v1.ContentService/NewsVideoGetListStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -603,6 +636,7 @@ type ContentServiceServer interface {
 	Category3Delete(context.Context, *Category3DeleteRequest) (*Category3DeleteResponse, error)
 	ArticleGetOne(context.Context, *ArticleGetOneRequest) (*ArticleGetOneResponse, error)
 	ArticleGetList(context.Context, *ArticleGetListRequest) (*ArticleGetListResponse, error)
+	ArticleGetListStream(*ArticleGetListRequest, ContentService_ArticleGetListStreamServer) error
 	ArticleCreate(context.Context, *ArticleCreateRequest) (*ArticleCreateResponse, error)
 	ArticleUpdate(context.Context, *ArticleUpdateRequest) (*ArticleUpdateResponse, error)
 	ArticleDelete(context.Context, *ArticleDeleteRequest) (*ArticleDeleteResponse, error)
@@ -701,6 +735,9 @@ func (UnimplementedContentServiceServer) ArticleGetOne(context.Context, *Article
 }
 func (UnimplementedContentServiceServer) ArticleGetList(context.Context, *ArticleGetListRequest) (*ArticleGetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ArticleGetList not implemented")
+}
+func (UnimplementedContentServiceServer) ArticleGetListStream(*ArticleGetListRequest, ContentService_ArticleGetListStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method ArticleGetListStream not implemented")
 }
 func (UnimplementedContentServiceServer) ArticleCreate(context.Context, *ArticleCreateRequest) (*ArticleCreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ArticleCreate not implemented")
@@ -1187,6 +1224,27 @@ func _ContentService_ArticleGetList_Handler(srv interface{}, ctx context.Context
 		return srv.(ContentServiceServer).ArticleGetList(ctx, req.(*ArticleGetListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_ArticleGetListStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ArticleGetListRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ContentServiceServer).ArticleGetListStream(m, &contentServiceArticleGetListStreamServer{stream})
+}
+
+type ContentService_ArticleGetListStreamServer interface {
+	Send(*ArticleGetListStreamResponse) error
+	grpc.ServerStream
+}
+
+type contentServiceArticleGetListStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *contentServiceArticleGetListStreamServer) Send(m *ArticleGetListStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _ContentService_ArticleCreate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1855,6 +1913,11 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ArticleGetListStream",
+			Handler:       _ContentService_ArticleGetListStream_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "InfografikGetListStream",
 			Handler:       _ContentService_InfografikGetListStream_Handler,
