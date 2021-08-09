@@ -67,6 +67,7 @@ type ContentServiceClient interface {
 	PollingCreate(ctx context.Context, in *PollingCreateRequest, opts ...grpc.CallOption) (*PollingCreateResponse, error)
 	PollingUpdate(ctx context.Context, in *PollingUpdateRequest, opts ...grpc.CallOption) (*PollingUpdateResponse, error)
 	PollingDelete(ctx context.Context, in *PollingDeleteRequest, opts ...grpc.CallOption) (*PollingDeleteResponse, error)
+	LogGetList(ctx context.Context, in *LogGetListInput, opts ...grpc.CallOption) (*LogGetListOutput, error)
 }
 
 type contentServiceClient struct {
@@ -610,6 +611,15 @@ func (c *contentServiceClient) PollingDelete(ctx context.Context, in *PollingDel
 	return out, nil
 }
 
+func (c *contentServiceClient) LogGetList(ctx context.Context, in *LogGetListInput, opts ...grpc.CallOption) (*LogGetListOutput, error) {
+	out := new(LogGetListOutput)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/LogGetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ContentServiceServer is the server API for ContentService service.
 // All implementations must embed UnimplementedContentServiceServer
 // for forward compatibility
@@ -663,6 +673,7 @@ type ContentServiceServer interface {
 	PollingCreate(context.Context, *PollingCreateRequest) (*PollingCreateResponse, error)
 	PollingUpdate(context.Context, *PollingUpdateRequest) (*PollingUpdateResponse, error)
 	PollingDelete(context.Context, *PollingDeleteRequest) (*PollingDeleteResponse, error)
+	LogGetList(context.Context, *LogGetListInput) (*LogGetListOutput, error)
 	mustEmbedUnimplementedContentServiceServer()
 }
 
@@ -816,6 +827,9 @@ func (UnimplementedContentServiceServer) PollingUpdate(context.Context, *Polling
 }
 func (UnimplementedContentServiceServer) PollingDelete(context.Context, *PollingDeleteRequest) (*PollingDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PollingDelete not implemented")
+}
+func (UnimplementedContentServiceServer) LogGetList(context.Context, *LogGetListInput) (*LogGetListOutput, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogGetList not implemented")
 }
 func (UnimplementedContentServiceServer) mustEmbedUnimplementedContentServiceServer() {}
 
@@ -1724,6 +1738,24 @@ func _ContentService_PollingDelete_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContentService_LogGetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogGetListInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).LogGetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/LogGetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).LogGetList(ctx, req.(*LogGetListInput))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ContentService_ServiceDesc is the grpc.ServiceDesc for ContentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1910,6 +1942,10 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PollingDelete",
 			Handler:    _ContentService_PollingDelete_Handler,
+		},
+		{
+			MethodName: "LogGetList",
+			Handler:    _ContentService_LogGetList_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
