@@ -23,6 +23,7 @@ type ContentServiceClient interface {
 	TagCreate(ctx context.Context, in *TagCreateRequest, opts ...grpc.CallOption) (*TagCreateResponse, error)
 	TagUpdate(ctx context.Context, in *TagUpdateRequest, opts ...grpc.CallOption) (*TagUpdateResponse, error)
 	TagDelete(ctx context.Context, in *TagDeleteRequest, opts ...grpc.CallOption) (*TagDeleteResponse, error)
+	TagAnalytics(ctx context.Context, in *TagAnalyticsRequest, opts ...grpc.CallOption) (*TagAnalyticsResponse, error)
 	Category1GetOne(ctx context.Context, in *Category1GetOneRequest, opts ...grpc.CallOption) (*Category1GetOneResponse, error)
 	Category2GetOne(ctx context.Context, in *Category2GetOneRequest, opts ...grpc.CallOption) (*Category2GetOneResponse, error)
 	Category3GetOne(ctx context.Context, in *Category3GetOneRequest, opts ...grpc.CallOption) (*Category3GetOneResponse, error)
@@ -117,6 +118,15 @@ func (c *contentServiceClient) TagUpdate(ctx context.Context, in *TagUpdateReque
 func (c *contentServiceClient) TagDelete(ctx context.Context, in *TagDeleteRequest, opts ...grpc.CallOption) (*TagDeleteResponse, error) {
 	out := new(TagDeleteResponse)
 	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/TagDelete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *contentServiceClient) TagAnalytics(ctx context.Context, in *TagAnalyticsRequest, opts ...grpc.CallOption) (*TagAnalyticsResponse, error) {
+	out := new(TagAnalyticsResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/TagAnalytics", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -629,6 +639,7 @@ type ContentServiceServer interface {
 	TagCreate(context.Context, *TagCreateRequest) (*TagCreateResponse, error)
 	TagUpdate(context.Context, *TagUpdateRequest) (*TagUpdateResponse, error)
 	TagDelete(context.Context, *TagDeleteRequest) (*TagDeleteResponse, error)
+	TagAnalytics(context.Context, *TagAnalyticsRequest) (*TagAnalyticsResponse, error)
 	Category1GetOne(context.Context, *Category1GetOneRequest) (*Category1GetOneResponse, error)
 	Category2GetOne(context.Context, *Category2GetOneRequest) (*Category2GetOneResponse, error)
 	Category3GetOne(context.Context, *Category3GetOneRequest) (*Category3GetOneResponse, error)
@@ -695,6 +706,9 @@ func (UnimplementedContentServiceServer) TagUpdate(context.Context, *TagUpdateRe
 }
 func (UnimplementedContentServiceServer) TagDelete(context.Context, *TagDeleteRequest) (*TagDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TagDelete not implemented")
+}
+func (UnimplementedContentServiceServer) TagAnalytics(context.Context, *TagAnalyticsRequest) (*TagAnalyticsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TagAnalytics not implemented")
 }
 func (UnimplementedContentServiceServer) Category1GetOne(context.Context, *Category1GetOneRequest) (*Category1GetOneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Category1GetOne not implemented")
@@ -930,6 +944,24 @@ func _ContentService_TagDelete_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ContentServiceServer).TagDelete(ctx, req.(*TagDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ContentService_TagAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TagAnalyticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).TagAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/TagAnalytics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).TagAnalytics(ctx, req.(*TagAnalyticsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1782,6 +1814,10 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TagDelete",
 			Handler:    _ContentService_TagDelete_Handler,
+		},
+		{
+			MethodName: "TagAnalytics",
+			Handler:    _ContentService_TagAnalytics_Handler,
 		},
 		{
 			MethodName: "Category1GetOne",
