@@ -63,6 +63,7 @@ type ContentServiceClient interface {
 	NewsVideoCreate(ctx context.Context, in *NewsVideoCreateRequest, opts ...grpc.CallOption) (*NewsVideoCreateResponse, error)
 	NewsVideoUpdate(ctx context.Context, in *NewsVideoUpdateRequest, opts ...grpc.CallOption) (*NewsVideoUpdateResponse, error)
 	NewsVideoDelete(ctx context.Context, in *NewsVideoDeleteRequest, opts ...grpc.CallOption) (*NewsVideoDeleteResponse, error)
+	CheckSlug(ctx context.Context, in *CheckSlugRequest, opts ...grpc.CallOption) (*CheckSlugResponse, error)
 	PollingGetOne(ctx context.Context, in *PollingGetOneRequest, opts ...grpc.CallOption) (*PollingGetOneResponse, error)
 	PollingGetList(ctx context.Context, in *PollingGetListRequest, opts ...grpc.CallOption) (*PollingGetListResponse, error)
 	PollingCreate(ctx context.Context, in *PollingCreateRequest, opts ...grpc.CallOption) (*PollingCreateResponse, error)
@@ -576,6 +577,15 @@ func (c *contentServiceClient) NewsVideoDelete(ctx context.Context, in *NewsVide
 	return out, nil
 }
 
+func (c *contentServiceClient) CheckSlug(ctx context.Context, in *CheckSlugRequest, opts ...grpc.CallOption) (*CheckSlugResponse, error) {
+	out := new(CheckSlugResponse)
+	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/CheckSlug", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *contentServiceClient) PollingGetOne(ctx context.Context, in *PollingGetOneRequest, opts ...grpc.CallOption) (*PollingGetOneResponse, error) {
 	out := new(PollingGetOneResponse)
 	err := c.cc.Invoke(ctx, "/contents.v1.ContentService/PollingGetOne", in, out, opts...)
@@ -679,6 +689,7 @@ type ContentServiceServer interface {
 	NewsVideoCreate(context.Context, *NewsVideoCreateRequest) (*NewsVideoCreateResponse, error)
 	NewsVideoUpdate(context.Context, *NewsVideoUpdateRequest) (*NewsVideoUpdateResponse, error)
 	NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error)
+	CheckSlug(context.Context, *CheckSlugRequest) (*CheckSlugResponse, error)
 	PollingGetOne(context.Context, *PollingGetOneRequest) (*PollingGetOneResponse, error)
 	PollingGetList(context.Context, *PollingGetListRequest) (*PollingGetListResponse, error)
 	PollingCreate(context.Context, *PollingCreateRequest) (*PollingCreateResponse, error)
@@ -826,6 +837,9 @@ func (UnimplementedContentServiceServer) NewsVideoUpdate(context.Context, *NewsV
 }
 func (UnimplementedContentServiceServer) NewsVideoDelete(context.Context, *NewsVideoDeleteRequest) (*NewsVideoDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NewsVideoDelete not implemented")
+}
+func (UnimplementedContentServiceServer) CheckSlug(context.Context, *CheckSlugRequest) (*CheckSlugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSlug not implemented")
 }
 func (UnimplementedContentServiceServer) PollingGetOne(context.Context, *PollingGetOneRequest) (*PollingGetOneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PollingGetOne not implemented")
@@ -1680,6 +1694,24 @@ func _ContentService_NewsVideoDelete_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ContentService_CheckSlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSlugRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ContentServiceServer).CheckSlug(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/contents.v1.ContentService/CheckSlug",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ContentServiceServer).CheckSlug(ctx, req.(*CheckSlugRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ContentService_PollingGetOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PollingGetOneRequest)
 	if err := dec(in); err != nil {
@@ -1958,6 +1990,10 @@ var ContentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "NewsVideoDelete",
 			Handler:    _ContentService_NewsVideoDelete_Handler,
+		},
+		{
+			MethodName: "CheckSlug",
+			Handler:    _ContentService_CheckSlug_Handler,
 		},
 		{
 			MethodName: "PollingGetOne",
