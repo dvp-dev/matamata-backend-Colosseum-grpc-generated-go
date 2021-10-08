@@ -554,6 +554,7 @@ func (x *ArticleSEO) GetSearchEngineFollowLinksOnThisPost() bool {
 	return false
 }
 
+// ---
 type Article struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
